@@ -1,0 +1,2 @@
+# pybWeiXin
+my weixin  project
