@@ -9,7 +9,7 @@ public class Apply_cash implements Cloneable , Serializable{
 
     //public static String[] carrays ={"ac_id","ui_id","weixin_no","name","telephone","money","state","money_old","ctime","utime","note"};
 
-    public long ac_id;//bigint(20)    
+    public long ac_id;//bigint(20)    主键ID
     public long ui_id;//bigint(20)    用户id
     public String weixin_no="";//varchar(80)    用户微信号
     public String name="";//varchar(60)    用户真实姓名

@@ -43,7 +43,7 @@ public class Apply_cashDao extends BaseDao{
 
     private  String[] carrays ={"ac_id","ui_id","weixin_no","name","telephone","money","state","money_old","ctime","utime","note"};
     private  String coulmns ="ac_id,ui_id,weixin_no,name,telephone,money,state,money_old,ctime,utime,note";
-    private  String coulmns2 ="ac_id,ui_id,weixin_no,name,telephone,money,state,money_old,ctime,utime,note";
+    private  String coulmns2 ="ui_id,weixin_no,name,telephone,money,state,money_old,ctime,utime,note";
 
     public  String[] getCarrays(){
         return  carrays;
@@ -66,7 +66,7 @@ public class Apply_cashDao extends BaseDao{
     public int insert(Apply_cash bean, String TABLENAME2) throws SQLException{
         String sql;
         try{
-            sql = "INSERT INTO "+TABLENAME2+" (ac_id,ui_id,weixin_no,name,telephone,money,state,money_old,ctime,utime,note) VALUES (:ac_id,:ui_id,:weixin_no,:name,:telephone,:money,:state,:money_old,:ctime,:utime,:note)";
+            sql = "INSERT INTO "+TABLENAME2+" (ui_id,weixin_no,name,telephone,money,state,money_old,ctime,utime,note) VALUES (:ui_id,:weixin_no,:name,:telephone,:money,:state,:money_old,:ctime,:utime,:note)";
             SqlParameterSource ps = new BeanPropertySqlParameterSource(bean);
             KeyHolder keyholder = new GeneratedKeyHolder();
             _np.update(sql, ps, keyholder);
@@ -106,7 +106,7 @@ public class Apply_cashDao extends BaseDao{
     public int[] insert(final List<Apply_cash> beans, String TABLENAME2) throws SQLException{
         String sql;
         try{
-            sql = "INSERT INTO "+TABLENAME2+" (ac_id,ui_id,weixin_no,name,telephone,money,state,money_old,ctime,utime,note) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            sql = "INSERT INTO "+TABLENAME2+" (ui_id,weixin_no,name,telephone,money,state,money_old,ctime,utime,note) VALUES (?,?,?,?,?,?,?,?,?,?)";
             return _np.getJdbcOperations().batchUpdate(sql, new BatchPreparedStatementSetter() {
                 //@Override
                 public int getBatchSize() {
@@ -115,7 +115,6 @@ public class Apply_cashDao extends BaseDao{
                 //@Override
                 public void setValues(PreparedStatement ps, int i) throws SQLException {
                     Apply_cash bean = beans.get(i);
-                    ps.setLong(0, bean.ac_id);
                     ps.setLong(1, bean.ui_id);
                     ps.setString(2, bean.weixin_no);
                     ps.setString(3, bean.name);
@@ -144,7 +143,7 @@ public class Apply_cashDao extends BaseDao{
     public List<Apply_cash> selectAll(String TABLENAME2) {
         String sql;
         try{
-            sql = "SELECT ac_id,ui_id,weixin_no,name,telephone,money,state,money_old,ctime,utime,note FROM "+TABLENAME2+" ORDER BY id";
+            sql = "SELECT ac_id,ui_id,weixin_no,name,telephone,money,state,money_old,ctime,utime,note FROM "+TABLENAME2+" ORDER BY ac_id";
             return _np.getJdbcOperations().query(sql, new BeanPropertyRowMapper<Apply_cash>(Apply_cash.class));
         }catch(Exception e){
             //createTable(TABLENAME2);
@@ -162,7 +161,7 @@ public class Apply_cashDao extends BaseDao{
     public List<Apply_cash> selectLast(int num ,String TABLENAME2) {
         String sql;
         try{
-            sql = "SELECT ac_id,ui_id,weixin_no,name,telephone,money,state,money_old,ctime,utime,note FROM "+TABLENAME2+" ORDER BY id DESC LIMIT "+num+"" ;
+            sql = "SELECT ac_id,ui_id,weixin_no,name,telephone,money,state,money_old,ctime,utime,note FROM "+TABLENAME2+" ORDER BY ac_id DESC LIMIT "+num+"" ;
             return _np.getJdbcOperations().query(sql, new BeanPropertyRowMapper<Apply_cash>(Apply_cash.class));
         }catch(Exception e){
             //createTable(TABLENAME2);
@@ -172,17 +171,17 @@ public class Apply_cashDao extends BaseDao{
     }
 
     //根据主键查询
-    public List<Apply_cash> selectGtKey( id) {
-        return selectGtKey(id, TABLENAME);
+    public List<Apply_cash> selectGtKey(long ac_id) {
+        return selectGtKey(ac_id, TABLENAME);
     }
 
     //根据主键查询
-    public List<Apply_cash> selectGtKey( id, String TABLENAME2) {
+    public List<Apply_cash> selectGtKey(long ac_id, String TABLENAME2) {
         String sql;
         try{
-            sql="SELECT ac_id,ui_id,weixin_no,name,telephone,money,state,money_old,ctime,utime,note FROM "+TABLENAME2+" WHERE id>:id";
+            sql="SELECT ac_id,ui_id,weixin_no,name,telephone,money,state,money_old,ctime,utime,note FROM "+TABLENAME2+" WHERE ac_id>:ac_id";
             Map<String,Object> param = new HashMap<String,Object>();
-            param.put("id", id);
+            param.put("ac_id", ac_id);
             return _np.query(sql, param, new BeanPropertyRowMapper<Apply_cash>(Apply_cash.class));
         }catch(Exception e){
             //createTable(TABLENAME2);
@@ -192,22 +191,22 @@ public class Apply_cashDao extends BaseDao{
     }
 
     //根据主键查询
-    public Apply_cash selectByKey( id) {
-        return selectByKey(id, TABLENAME);
+    public Apply_cash selectByKey(long ac_id) {
+        return selectByKey(ac_id, TABLENAME);
     }
 
     //根据主键查询
-    public Apply_cash selectByKey( id, String TABLENAME2) {
+    public Apply_cash selectByKey(long ac_id, String TABLENAME2) {
         String sql;
         try{
-            sql="SELECT ac_id,ui_id,weixin_no,name,telephone,money,state,money_old,ctime,utime,note FROM "+TABLENAME2+" WHERE id=:id";
+            sql="SELECT ac_id,ui_id,weixin_no,name,telephone,money,state,money_old,ctime,utime,note FROM "+TABLENAME2+" WHERE ac_id=:ac_id";
             Map<String,Object> param = new HashMap<String,Object>();
-            param.put("id", id);
+            param.put("ac_id", ac_id);
             List<Apply_cash> list =  _np.query(sql, param, new BeanPropertyRowMapper<Apply_cash>(Apply_cash.class));
             return (list == null || list.size() == 0) ? null : list.get(0);
         }catch(Exception e){
             //createTable(TABLENAME2);
-            log.error("selectByKey id="+id,e);
+            log.error("selectByKey ac_id="+ac_id,e);
             return null;
         }
     }
@@ -257,7 +256,7 @@ public class Apply_cashDao extends BaseDao{
     public int updateByKey(Apply_cash bean, String TABLENAME2) {
         try{
             String sql;
-            sql = "UPDATE "+TABLENAME2+" SET ac_id=:ac_id,ui_id=:ui_id,weixin_no=:weixin_no,name=:name,telephone=:telephone,money=:money,state=:state,money_old=:money_old,ctime=:ctime,utime=:utime,note=:note WHERE id=:id";
+            sql = "UPDATE "+TABLENAME2+" SET ui_id=:ui_id,weixin_no=:weixin_no,name=:name,telephone=:telephone,money=:money,state=:state,money_old=:money_old,ctime=:ctime,utime=:utime,note=:note WHERE ac_id=:ac_id";
             SqlParameterSource ps = new BeanPropertySqlParameterSource(bean);
             return _np.update(sql, ps);
         }catch(Exception e){
@@ -275,7 +274,7 @@ public class Apply_cashDao extends BaseDao{
     public int[] updateByKey (final List<Apply_cash> beans, String TABLENAME2) throws SQLException{
         try{
             String sql;
-            sql = "UPDATE "+TABLENAME2+" SET ac_id=?,ui_id=?,weixin_no=?,name=?,telephone=?,money=?,state=?,money_old=?,ctime=?,utime=?,note=? WHERE id=?";
+            sql = "UPDATE "+TABLENAME2+" SET ui_id=?,weixin_no=?,name=?,telephone=?,money=?,state=?,money_old=?,ctime=?,utime=?,note=? WHERE ac_id=?";
             return _np.getJdbcOperations().batchUpdate(sql, new BatchPreparedStatementSetter() {
                 //@Override
                 public int getBatchSize() {
@@ -284,7 +283,6 @@ public class Apply_cashDao extends BaseDao{
                 //@Override
                 public void setValues(PreparedStatement ps, int i) throws SQLException {
                     Apply_cash bean = beans.get(i);
-                    ps.setLong(0, bean.ac_id);
                     ps.setLong(1, bean.ui_id);
                     ps.setString(2, bean.weixin_no);
                     ps.setString(3, bean.name);
@@ -295,7 +293,7 @@ public class Apply_cashDao extends BaseDao{
                     ps.setTimestamp(8, new Timestamp(bean.ctime.getTime()));
                     ps.setTimestamp(9, new Timestamp(bean.utime.getTime()));
                     ps.setString(10, bean.note);
-                    ps.(11, bean.id);
+                    ps.setLong(11, bean.ac_id);
                 }
             });
         }catch(Exception e){
@@ -305,17 +303,17 @@ public class Apply_cashDao extends BaseDao{
     }
 
     //删除单条数据
-    public int deleteByKey( id) throws SQLException{
-        return deleteByKey(id, TABLENAME);
+    public int deleteByKey(long ac_id) throws SQLException{
+        return deleteByKey(ac_id, TABLENAME);
     }
 
     //删除单条数据
-    public int deleteByKey( id, String TABLENAME2) throws SQLException{
+    public int deleteByKey(long ac_id, String TABLENAME2) throws SQLException{
         String sql;
         try{
-            sql = "DELETE FROM "+TABLENAME2+" WHERE id=:id";
+            sql = "DELETE FROM "+TABLENAME2+" WHERE ac_id=:ac_id";
             Map<String,Object> param = new HashMap<String,Object>();
-            param.put("id", id);
+            param.put("ac_id", ac_id);
             return _np.update(sql, param);
         }catch(Exception e){
             log.error("deleteByKey", e);
@@ -324,15 +322,15 @@ public class Apply_cashDao extends BaseDao{
     }
 
     //批量删除数据
-    public int[] deleteByKey([] keys) throws SQLException{
+    public int[] deleteByKey(long[] keys) throws SQLException{
         return deleteByKey(keys, TABLENAME);
     }
 
     //批量删除数据
-    public int[] deleteByKey(final [] keys, String TABLENAME2) throws SQLException{
+    public int[] deleteByKey(final long[] keys, String TABLENAME2) throws SQLException{
         String sql;
         try{
-            sql = "DELETE FROM "+TABLENAME2+" WHERE id=?";
+            sql = "DELETE FROM "+TABLENAME2+" WHERE ac_id=?";
             return _np.getJdbcOperations().batchUpdate(sql, new BatchPreparedStatementSetter() {
                 //@Override
                 public int getBatchSize() {
@@ -340,7 +338,7 @@ public class Apply_cashDao extends BaseDao{
                 }
                 //@Override
                 public void setValues(PreparedStatement ps, int i) throws SQLException {
-                    ps.(1 , keys[i]);
+                    ps.setLong(1 , keys[i]);
                 }
             });
         }catch(Exception e){
@@ -354,7 +352,7 @@ public class Apply_cashDao extends BaseDao{
         try{
             String sql;
             sql = "CREATE TABLE IF NOT EXISTS `${TABLENAME}` (" +
-                 "	`ac_id`  BIGINT(20) COMMENT '//bigint(20)    '," +
+                 "	`ac_id`  BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '//bigint(20)    主键ID'," +
                  "	`ui_id`  BIGINT(20) COMMENT '//bigint(20)    用户id'," +
                  "	`weixin_no`  VARCHAR(80) COMMENT '//varchar(80)    用户微信号'," +
                  "	`name`  VARCHAR(60) COMMENT '//varchar(60)    用户真实姓名'," +
@@ -365,6 +363,7 @@ public class Apply_cashDao extends BaseDao{
                  "	`ctime`  TIMESTAMP COMMENT '//timestamp    创建时间'," +
                  "	`utime`  TIMESTAMP COMMENT '//timestamp    修改时间'," +
                  "	`note`  VARCHAR(60) COMMENT '//varchar(60)    备注'," +
+                 "	PRIMARY KEY (`ac_id`)" +
                  ") ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;";
             Map<String,String> params = new HashMap<String,String>();
             params.put("TABLENAME", TABLENAME2);

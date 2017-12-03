@@ -7,7 +7,7 @@ import java.util.*;
 @SuppressWarnings({"serial"})
 public class User_info implements Cloneable , Serializable{
 
-    //public static String[] carrays ={"ui_id","avatar","nickname","weixin_no","weixin_id","vc","score","level","recommend_num","is_partner","ctime","utime","is_forbidden","telephone","name","note","recommend_id","recommend_nickname","recommend_code"};
+    //public static String[] carrays ={"ui_id","avatar","nickname","weixin_no","weixin_id","vc","score","level","recommend_num","is_partner","ctime","utime","is_forbidden","telephone","name","note","recommend_id","recommend_nickname","recommend_code","token"};
 
     public long ui_id;//bigint(20)    用户主键ID
     public String avatar="";//varchar(150)    用户头像
@@ -28,6 +28,7 @@ public class User_info implements Cloneable , Serializable{
     public long recommend_id;//bigint(20)    推荐我的人用户ID
     public String recommend_nickname="";//varchar(40)    推荐我的人用户昵称
     public String recommend_code="";//varchar(10)    我的推荐邀请码（六位数字）
+    public String token="";//varchar(100)    用户登录刷新token
 
 
 
@@ -213,9 +214,20 @@ public class User_info implements Cloneable , Serializable{
         this.recommend_code= value;
     }
 
+    public String getToken(){
+        return token;
+    }
+
+    public void setToken(String value){
+    	if(value == null){
+           value = "";
+        }
+        this.token= value;
+    }
 
 
-    public static User_info newUser_info(long ui_id, String avatar, String nickname, String weixin_no, String weixin_id, int vc, int score, int level, int recommend_num, int is_partner, java.util.Date ctime, java.util.Date utime, int is_forbidden, String telephone, String name, byte[] note, long recommend_id, String recommend_nickname, String recommend_code) {
+
+    public static User_info newUser_info(long ui_id, String avatar, String nickname, String weixin_no, String weixin_id, int vc, int score, int level, int recommend_num, int is_partner, java.util.Date ctime, java.util.Date utime, int is_forbidden, String telephone, String name, byte[] note, long recommend_id, String recommend_nickname, String recommend_code, String token) {
         User_info ret = new User_info();
         ret.setUi_id(ui_id);
         ret.setAvatar(avatar);
@@ -236,6 +248,7 @@ public class User_info implements Cloneable , Serializable{
         ret.setRecommend_id(recommend_id);
         ret.setRecommend_nickname(recommend_nickname);
         ret.setRecommend_code(recommend_code);
+        ret.setToken(token);
         return ret;    
     }
 
@@ -259,6 +272,7 @@ public class User_info implements Cloneable , Serializable{
         long recommend_id = user_info.getRecommend_id();
         String recommend_nickname = user_info.getRecommend_nickname();
         String recommend_code = user_info.getRecommend_code();
+        String token = user_info.getToken();
 
         this.setUi_id(ui_id);
         this.setAvatar(avatar);
@@ -279,6 +293,7 @@ public class User_info implements Cloneable , Serializable{
         this.setRecommend_id(recommend_id);
         this.setRecommend_nickname(recommend_nickname);
         this.setRecommend_code(recommend_code);
+        this.setToken(token);
 
     }
 
@@ -303,6 +318,7 @@ public class User_info implements Cloneable , Serializable{
         long recommend_id = user_info.getRecommend_id();
         String recommend_nickname = user_info.getRecommend_nickname();
         String recommend_code = user_info.getRecommend_code();
+        String token = user_info.getToken();
     }
 
     public Map<String,Object> toMap(){
@@ -329,6 +345,7 @@ public class User_info implements Cloneable , Serializable{
         long recommend_id = user_info.getRecommend_id();
         String recommend_nickname = user_info.getRecommend_nickname();
         String recommend_code = user_info.getRecommend_code();
+        String token = user_info.getToken();
     
         Map<String,Object>  _ret = new HashMap<String,Object>();
         _ret.put("ui_id",ui_id);
@@ -350,6 +367,7 @@ public class User_info implements Cloneable , Serializable{
         _ret.put("recommend_id",recommend_id);
         _ret.put("recommend_nickname",recommend_nickname);
         _ret.put("recommend_code",recommend_code);
+        _ret.put("token",token);
         return _ret;
     }
 

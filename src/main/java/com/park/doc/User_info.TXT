@@ -20,4 +20,5 @@
 |recommend_id|推荐我的人用户ID|long|
 |recommend_nickname|推荐我的人用户昵称|String|
 |recommend_code|我的推荐邀请码（六位数字）|String|
+|token|用户登录刷新token|String|
 

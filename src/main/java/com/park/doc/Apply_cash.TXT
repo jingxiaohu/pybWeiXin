@@ -1,7 +1,7 @@
 #########返回字段说明
 |名称|描述|类型|
 |----|----|---|
-|ac_id||long|
+|ac_id|主键ID|long|
 |ui_id|用户id|long|
 |weixin_no|用户微信号|String|
 |name|用户真实姓名|String|
