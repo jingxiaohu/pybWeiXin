@@ -29,6 +29,12 @@ protected User_addressDao user_addressDao;
 protected Request_params_logDao request_params_logDao;
 @Autowired
 protected China_areaDao china_areaDao;
+@Autowired
+protected Apply_cashDao apply_cashDao;
+@Autowired
+protected Recommend_userDao recommend_userDao;
+@Autowired
+protected Recommend_earningsDao recommend_earningsDao;
 
 /*******************************下面是GET方法**************************************/
 public User_infoDao getUser_infoDao() {
@@ -60,6 +66,15 @@ public Request_params_logDao getRequest_params_logDao() {
 }
 public China_areaDao getChina_areaDao() {
 	return china_areaDao;
+}
+public Apply_cashDao getApply_cashDao() {
+	return apply_cashDao;
+}
+public Recommend_userDao getRecommend_userDao() {
+	return recommend_userDao;
+}
+public Recommend_earningsDao getRecommend_earningsDao() {
+	return recommend_earningsDao;
 }
 
 

@@ -7,7 +7,7 @@ import java.util.*;
 @SuppressWarnings({"serial"})
 public class User_info implements Cloneable , Serializable{
 
-    //public static String[] carrays ={"ui_id","avatar","nickname","weixin_no","weixin_id","vc","score","level","recommend_num","is_partner","ctime","utime","is_forbidden","note"};
+    //public static String[] carrays ={"ui_id","avatar","nickname","weixin_no","weixin_id","vc","score","level","recommend_num","is_partner","ctime","utime","is_forbidden","telephone","name","note","recommend_id","recommend_nickname","recommend_code"};
 
     public long ui_id;//bigint(20)    用户主键ID
     public String avatar="";//varchar(150)    用户头像
@@ -22,7 +22,12 @@ public class User_info implements Cloneable , Serializable{
     public java.util.Date ctime=new java.util.Date();//timestamp    创建时间
     public java.util.Date utime=new java.util.Date();//timestamp    修改时间
     public int is_forbidden;//int(11)    是否禁用0：不1：禁用
+    public String telephone="";//varchar(30)    用户提现绑定手机号码
+    public String name="";//varchar(30)    用户提现真实姓名
     public byte[] note;//varbinary(60)    备注
+    public long recommend_id;//bigint(20)    推荐我的人用户ID
+    public String recommend_nickname="";//varchar(40)    推荐我的人用户昵称
+    public String recommend_code="";//varchar(10)    我的推荐邀请码（六位数字）
 
 
 
@@ -148,6 +153,28 @@ public class User_info implements Cloneable , Serializable{
         this.is_forbidden= value;
     }
 
+    public String getTelephone(){
+        return telephone;
+    }
+
+    public void setTelephone(String value){
+    	if(value == null){
+           value = "";
+        }
+        this.telephone= value;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String value){
+    	if(value == null){
+           value = "";
+        }
+        this.name= value;
+    }
+
     public byte[] getNote(){
         return note;
     }
@@ -156,9 +183,39 @@ public class User_info implements Cloneable , Serializable{
         this.note= value;
     }
 
+    public long getRecommend_id(){
+        return recommend_id;
+    }
+
+    public void setRecommend_id(long value){
+        this.recommend_id= value;
+    }
+
+    public String getRecommend_nickname(){
+        return recommend_nickname;
+    }
+
+    public void setRecommend_nickname(String value){
+    	if(value == null){
+           value = "";
+        }
+        this.recommend_nickname= value;
+    }
+
+    public String getRecommend_code(){
+        return recommend_code;
+    }
+
+    public void setRecommend_code(String value){
+    	if(value == null){
+           value = "";
+        }
+        this.recommend_code= value;
+    }
 
 
-    public static User_info newUser_info(long ui_id, String avatar, String nickname, String weixin_no, String weixin_id, int vc, int score, int level, int recommend_num, int is_partner, java.util.Date ctime, java.util.Date utime, int is_forbidden, byte[] note) {
+
+    public static User_info newUser_info(long ui_id, String avatar, String nickname, String weixin_no, String weixin_id, int vc, int score, int level, int recommend_num, int is_partner, java.util.Date ctime, java.util.Date utime, int is_forbidden, String telephone, String name, byte[] note, long recommend_id, String recommend_nickname, String recommend_code) {
         User_info ret = new User_info();
         ret.setUi_id(ui_id);
         ret.setAvatar(avatar);
@@ -173,7 +230,12 @@ public class User_info implements Cloneable , Serializable{
         ret.setCtime(ctime);
         ret.setUtime(utime);
         ret.setIs_forbidden(is_forbidden);
+        ret.setTelephone(telephone);
+        ret.setName(name);
         ret.setNote(note);
+        ret.setRecommend_id(recommend_id);
+        ret.setRecommend_nickname(recommend_nickname);
+        ret.setRecommend_code(recommend_code);
         return ret;    
     }
 
@@ -191,7 +253,12 @@ public class User_info implements Cloneable , Serializable{
         java.util.Date ctime = user_info.getCtime();
         java.util.Date utime = user_info.getUtime();
         int is_forbidden = user_info.getIs_forbidden();
+        String telephone = user_info.getTelephone();
+        String name = user_info.getName();
         byte[] note = user_info.getNote();
+        long recommend_id = user_info.getRecommend_id();
+        String recommend_nickname = user_info.getRecommend_nickname();
+        String recommend_code = user_info.getRecommend_code();
 
         this.setUi_id(ui_id);
         this.setAvatar(avatar);
@@ -206,7 +273,12 @@ public class User_info implements Cloneable , Serializable{
         this.setCtime(ctime);
         this.setUtime(utime);
         this.setIs_forbidden(is_forbidden);
+        this.setTelephone(telephone);
+        this.setName(name);
         this.setNote(note);
+        this.setRecommend_id(recommend_id);
+        this.setRecommend_nickname(recommend_nickname);
+        this.setRecommend_code(recommend_code);
 
     }
 
@@ -225,7 +297,12 @@ public class User_info implements Cloneable , Serializable{
         java.util.Date ctime = user_info.getCtime();
         java.util.Date utime = user_info.getUtime();
         int is_forbidden = user_info.getIs_forbidden();
+        String telephone = user_info.getTelephone();
+        String name = user_info.getName();
         byte[] note = user_info.getNote();
+        long recommend_id = user_info.getRecommend_id();
+        String recommend_nickname = user_info.getRecommend_nickname();
+        String recommend_code = user_info.getRecommend_code();
     }
 
     public Map<String,Object> toMap(){
@@ -246,7 +323,12 @@ public class User_info implements Cloneable , Serializable{
         java.util.Date ctime = user_info.getCtime();
         java.util.Date utime = user_info.getUtime();
         int is_forbidden = user_info.getIs_forbidden();
+        String telephone = user_info.getTelephone();
+        String name = user_info.getName();
         byte[] note = user_info.getNote();
+        long recommend_id = user_info.getRecommend_id();
+        String recommend_nickname = user_info.getRecommend_nickname();
+        String recommend_code = user_info.getRecommend_code();
     
         Map<String,Object>  _ret = new HashMap<String,Object>();
         _ret.put("ui_id",ui_id);
@@ -262,7 +344,12 @@ public class User_info implements Cloneable , Serializable{
         _ret.put("ctime",ctime);
         _ret.put("utime",utime);
         _ret.put("is_forbidden",is_forbidden);
+        _ret.put("telephone",telephone);
+        _ret.put("name",name);
         _ret.put("note",note);
+        _ret.put("recommend_id",recommend_id);
+        _ret.put("recommend_nickname",recommend_nickname);
+        _ret.put("recommend_code",recommend_code);
         return _ret;
     }
 

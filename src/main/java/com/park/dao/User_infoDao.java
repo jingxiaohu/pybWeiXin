@@ -41,9 +41,9 @@ public class User_infoDao extends BaseDao{
     }
 
 
-    private  String[] carrays ={"ui_id","avatar","nickname","weixin_no","weixin_id","vc","score","level","recommend_num","is_partner","ctime","utime","is_forbidden","note"};
-    private  String coulmns ="ui_id,avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,note";
-    private  String coulmns2 ="avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,note";
+    private  String[] carrays ={"ui_id","avatar","nickname","weixin_no","weixin_id","vc","score","level","recommend_num","is_partner","ctime","utime","is_forbidden","telephone","name","note","recommend_id","recommend_nickname","recommend_code"};
+    private  String coulmns ="ui_id,avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,telephone,name,note,recommend_id,recommend_nickname,recommend_code";
+    private  String coulmns2 ="avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,telephone,name,note,recommend_id,recommend_nickname,recommend_code";
 
     public  String[] getCarrays(){
         return  carrays;
@@ -66,7 +66,7 @@ public class User_infoDao extends BaseDao{
     public int insert(User_info bean, String TABLENAME2) throws SQLException{
         String sql;
         try{
-            sql = "INSERT INTO "+TABLENAME2+" (avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,note) VALUES (:avatar,:nickname,:weixin_no,:weixin_id,:vc,:score,:level,:recommend_num,:is_partner,:ctime,:utime,:is_forbidden,:note)";
+            sql = "INSERT INTO "+TABLENAME2+" (avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,telephone,name,note,recommend_id,recommend_nickname,recommend_code) VALUES (:avatar,:nickname,:weixin_no,:weixin_id,:vc,:score,:level,:recommend_num,:is_partner,:ctime,:utime,:is_forbidden,:telephone,:name,:note,:recommend_id,:recommend_nickname,:recommend_code)";
             SqlParameterSource ps = new BeanPropertySqlParameterSource(bean);
             KeyHolder keyholder = new GeneratedKeyHolder();
             _np.update(sql, ps, keyholder);
@@ -87,7 +87,7 @@ public class User_infoDao extends BaseDao{
     public int insert_primarykey(User_info bean, String TABLENAME2) throws SQLException{
         String sql;
         try{
-            sql = "INSERT INTO "+TABLENAME2+" (ui_id,avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,note) VALUES (:ui_id,:avatar,:nickname,:weixin_no,:weixin_id,:vc,:score,:level,:recommend_num,:is_partner,:ctime,:utime,:is_forbidden,:note)";
+            sql = "INSERT INTO "+TABLENAME2+" (ui_id,avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,telephone,name,note,recommend_id,recommend_nickname,recommend_code) VALUES (:ui_id,:avatar,:nickname,:weixin_no,:weixin_id,:vc,:score,:level,:recommend_num,:is_partner,:ctime,:utime,:is_forbidden,:telephone,:name,:note,:recommend_id,:recommend_nickname,:recommend_code)";
             SqlParameterSource ps = new BeanPropertySqlParameterSource(bean);
             return _np.update(sql, ps);
         }catch(Exception e){
@@ -106,7 +106,7 @@ public class User_infoDao extends BaseDao{
     public int[] insert(final List<User_info> beans, String TABLENAME2) throws SQLException{
         String sql;
         try{
-            sql = "INSERT INTO "+TABLENAME2+" (avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,note) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            sql = "INSERT INTO "+TABLENAME2+" (avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,telephone,name,note,recommend_id,recommend_nickname,recommend_code) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             return _np.getJdbcOperations().batchUpdate(sql, new BatchPreparedStatementSetter() {
                 //@Override
                 public int getBatchSize() {
@@ -127,7 +127,12 @@ public class User_infoDao extends BaseDao{
                     ps.setTimestamp(10, new Timestamp(bean.ctime.getTime()));
                     ps.setTimestamp(11, new Timestamp(bean.utime.getTime()));
                     ps.setInt(12, bean.is_forbidden);
-                    ps.setBytes(13, bean.note);
+                    ps.setString(13, bean.telephone);
+                    ps.setString(14, bean.name);
+                    ps.setBytes(15, bean.note);
+                    ps.setLong(16, bean.recommend_id);
+                    ps.setString(17, bean.recommend_nickname);
+                    ps.setString(18, bean.recommend_code);
                 }
             });
         }catch(Exception e){
@@ -146,7 +151,7 @@ public class User_infoDao extends BaseDao{
     public List<User_info> selectAll(String TABLENAME2) {
         String sql;
         try{
-            sql = "SELECT ui_id,avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,note FROM "+TABLENAME2+" ORDER BY ui_id";
+            sql = "SELECT ui_id,avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,telephone,name,note,recommend_id,recommend_nickname,recommend_code FROM "+TABLENAME2+" ORDER BY ui_id";
             return _np.getJdbcOperations().query(sql, new BeanPropertyRowMapper<User_info>(User_info.class));
         }catch(Exception e){
             //createTable(TABLENAME2);
@@ -164,7 +169,7 @@ public class User_infoDao extends BaseDao{
     public List<User_info> selectLast(int num ,String TABLENAME2) {
         String sql;
         try{
-            sql = "SELECT ui_id,avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,note FROM "+TABLENAME2+" ORDER BY ui_id DESC LIMIT "+num+"" ;
+            sql = "SELECT ui_id,avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,telephone,name,note,recommend_id,recommend_nickname,recommend_code FROM "+TABLENAME2+" ORDER BY ui_id DESC LIMIT "+num+"" ;
             return _np.getJdbcOperations().query(sql, new BeanPropertyRowMapper<User_info>(User_info.class));
         }catch(Exception e){
             //createTable(TABLENAME2);
@@ -182,7 +187,7 @@ public class User_infoDao extends BaseDao{
     public List<User_info> selectGtKey(long ui_id, String TABLENAME2) {
         String sql;
         try{
-            sql="SELECT ui_id,avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,note FROM "+TABLENAME2+" WHERE ui_id>:ui_id";
+            sql="SELECT ui_id,avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,telephone,name,note,recommend_id,recommend_nickname,recommend_code FROM "+TABLENAME2+" WHERE ui_id>:ui_id";
             Map<String,Object> param = new HashMap<String,Object>();
             param.put("ui_id", ui_id);
             return _np.query(sql, param, new BeanPropertyRowMapper<User_info>(User_info.class));
@@ -202,7 +207,7 @@ public class User_infoDao extends BaseDao{
     public User_info selectByKey(long ui_id, String TABLENAME2) {
         String sql;
         try{
-            sql="SELECT ui_id,avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,note FROM "+TABLENAME2+" WHERE ui_id=:ui_id";
+            sql="SELECT ui_id,avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,telephone,name,note,recommend_id,recommend_nickname,recommend_code FROM "+TABLENAME2+" WHERE ui_id=:ui_id";
             Map<String,Object> param = new HashMap<String,Object>();
             param.put("ui_id", ui_id);
             List<User_info> list =  _np.query(sql, param, new BeanPropertyRowMapper<User_info>(User_info.class));
@@ -241,7 +246,7 @@ public class User_infoDao extends BaseDao{
     public List<User_info> selectByPage(int begin, int num, String TABLENAME2) {
         try{
             String sql;
-            sql = "SELECT ui_id,avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,note FROM "+TABLENAME2+" LIMIT "+begin+", "+num+"";
+            sql = "SELECT ui_id,avatar,nickname,weixin_no,weixin_id,vc,score,level,recommend_num,is_partner,ctime,utime,is_forbidden,telephone,name,note,recommend_id,recommend_nickname,recommend_code FROM "+TABLENAME2+" LIMIT "+begin+", "+num+"";
             return _np.getJdbcOperations().query(sql,new BeanPropertyRowMapper<User_info>(User_info.class));
         }catch(Exception e){
             //createTable(TABLENAME2);
@@ -259,7 +264,7 @@ public class User_infoDao extends BaseDao{
     public int updateByKey(User_info bean, String TABLENAME2) {
         try{
             String sql;
-            sql = "UPDATE "+TABLENAME2+" SET avatar=:avatar,nickname=:nickname,weixin_no=:weixin_no,weixin_id=:weixin_id,vc=:vc,score=:score,level=:level,recommend_num=:recommend_num,is_partner=:is_partner,ctime=:ctime,utime=:utime,is_forbidden=:is_forbidden,note=:note WHERE ui_id=:ui_id";
+            sql = "UPDATE "+TABLENAME2+" SET avatar=:avatar,nickname=:nickname,weixin_no=:weixin_no,weixin_id=:weixin_id,vc=:vc,score=:score,level=:level,recommend_num=:recommend_num,is_partner=:is_partner,ctime=:ctime,utime=:utime,is_forbidden=:is_forbidden,telephone=:telephone,name=:name,note=:note,recommend_id=:recommend_id,recommend_nickname=:recommend_nickname,recommend_code=:recommend_code WHERE ui_id=:ui_id";
             SqlParameterSource ps = new BeanPropertySqlParameterSource(bean);
             return _np.update(sql, ps);
         }catch(Exception e){
@@ -277,7 +282,7 @@ public class User_infoDao extends BaseDao{
     public int[] updateByKey (final List<User_info> beans, String TABLENAME2) throws SQLException{
         try{
             String sql;
-            sql = "UPDATE "+TABLENAME2+" SET avatar=?,nickname=?,weixin_no=?,weixin_id=?,vc=?,score=?,level=?,recommend_num=?,is_partner=?,ctime=?,utime=?,is_forbidden=?,note=? WHERE ui_id=?";
+            sql = "UPDATE "+TABLENAME2+" SET avatar=?,nickname=?,weixin_no=?,weixin_id=?,vc=?,score=?,level=?,recommend_num=?,is_partner=?,ctime=?,utime=?,is_forbidden=?,telephone=?,name=?,note=?,recommend_id=?,recommend_nickname=?,recommend_code=? WHERE ui_id=?";
             return _np.getJdbcOperations().batchUpdate(sql, new BatchPreparedStatementSetter() {
                 //@Override
                 public int getBatchSize() {
@@ -298,8 +303,13 @@ public class User_infoDao extends BaseDao{
                     ps.setTimestamp(10, new Timestamp(bean.ctime.getTime()));
                     ps.setTimestamp(11, new Timestamp(bean.utime.getTime()));
                     ps.setInt(12, bean.is_forbidden);
-                    ps.setBytes(13, bean.note);
-                    ps.setLong(14, bean.ui_id);
+                    ps.setString(13, bean.telephone);
+                    ps.setString(14, bean.name);
+                    ps.setBytes(15, bean.note);
+                    ps.setLong(16, bean.recommend_id);
+                    ps.setString(17, bean.recommend_nickname);
+                    ps.setString(18, bean.recommend_code);
+                    ps.setLong(19, bean.ui_id);
                 }
             });
         }catch(Exception e){
@@ -371,7 +381,12 @@ public class User_infoDao extends BaseDao{
                  "	`ctime`  TIMESTAMP COMMENT '//timestamp    创建时间'," +
                  "	`utime`  TIMESTAMP COMMENT '//timestamp    修改时间'," +
                  "	`is_forbidden`  INT(11) COMMENT '//int(11)    是否禁用0：不1：禁用'," +
+                 "	`telephone`  VARCHAR(30) COMMENT '//varchar(30)    用户提现绑定手机号码'," +
+                 "	`name`  VARCHAR(30) COMMENT '//varchar(30)    用户提现真实姓名'," +
                  "	`note`  VARBINARY(60) COMMENT '//varbinary(60)    备注'," +
+                 "	`recommend_id`  BIGINT(20) COMMENT '//bigint(20)    推荐我的人用户ID'," +
+                 "	`recommend_nickname`  VARCHAR(40) COMMENT '//varchar(40)    推荐我的人用户昵称'," +
+                 "	`recommend_code`  VARCHAR(10) COMMENT '//varchar(10)    我的推荐邀请码（六位数字）'," +
                  "	PRIMARY KEY (`ui_id`)" +
                  ") ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;";
             Map<String,String> params = new HashMap<String,String>();

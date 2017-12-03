@@ -16,7 +16,8 @@ public class JxhCoderAuto {
 		String moduleName="";
 		String pkg = "com.park.";
 		String[] tablenames = {"user_info","after_sale","evaluate","goods","goods_details","goods_order"
-				,"goods_type","user_address","request_params_log","china_area"};
+				,"goods_type","user_address","request_params_log","china_area","apply_cash"
+		,"recommend_user","recommend_earnings"};
 		String ip = "127.0.0.1";
 		int port = 3306;
 		String user = "root";

@@ -7,7 +7,7 @@ import java.util.*;
 @SuppressWarnings({"serial"})
 public class Goods_order implements Cloneable , Serializable{
 
-    //public static String[] carrays ={"go_id","order_id","g_id","ui_id","price","num","express_info","express_time","address","name","telephone","subtotal","freight_price","money","ctime","ptime","stime","is_after_sale","is_pay","state","is_send","is_evaluate","note","is_del"};
+    //public static String[] carrays ={"go_id","order_id","g_id","ui_id","price","num","express_info","express_time","address","name","telephone","subtotal","freight_price","money","ctime","ptime","stime","is_after_sale","is_pay","state","is_send","is_evaluate","note","is_del","recommend_id"};
 
     public long go_id;//bigint(20)    主键ID
     public String order_id="";//varchar(80)    订单号
@@ -33,6 +33,7 @@ public class Goods_order implements Cloneable , Serializable{
     public int is_evaluate;//int(11)    是否待评价0：待评价1：已评价
     public String note="";//varchar(60)    备注
     public int is_del;//int(11)    是否逻辑删除:0：不删除1：删除
+    public long recommend_id;//bigint(20)    我的推荐人用户ID
 
 
 
@@ -258,9 +259,17 @@ public class Goods_order implements Cloneable , Serializable{
         this.is_del= value;
     }
 
+    public long getRecommend_id(){
+        return recommend_id;
+    }
+
+    public void setRecommend_id(long value){
+        this.recommend_id= value;
+    }
 
 
-    public static Goods_order newGoods_order(long go_id, String order_id, long g_id, long ui_id, int price, int num, String express_info, java.util.Date express_time, String address, String name, String telephone, int subtotal, int freight_price, int money, java.util.Date ctime, java.util.Date ptime, java.util.Date stime, int is_after_sale, int is_pay, int state, int is_send, int is_evaluate, String note, int is_del) {
+
+    public static Goods_order newGoods_order(long go_id, String order_id, long g_id, long ui_id, int price, int num, String express_info, java.util.Date express_time, String address, String name, String telephone, int subtotal, int freight_price, int money, java.util.Date ctime, java.util.Date ptime, java.util.Date stime, int is_after_sale, int is_pay, int state, int is_send, int is_evaluate, String note, int is_del, long recommend_id) {
         Goods_order ret = new Goods_order();
         ret.setGo_id(go_id);
         ret.setOrder_id(order_id);
@@ -286,6 +295,7 @@ public class Goods_order implements Cloneable , Serializable{
         ret.setIs_evaluate(is_evaluate);
         ret.setNote(note);
         ret.setIs_del(is_del);
+        ret.setRecommend_id(recommend_id);
         return ret;    
     }
 
@@ -314,6 +324,7 @@ public class Goods_order implements Cloneable , Serializable{
         int is_evaluate = goods_order.getIs_evaluate();
         String note = goods_order.getNote();
         int is_del = goods_order.getIs_del();
+        long recommend_id = goods_order.getRecommend_id();
 
         this.setGo_id(go_id);
         this.setOrder_id(order_id);
@@ -339,6 +350,7 @@ public class Goods_order implements Cloneable , Serializable{
         this.setIs_evaluate(is_evaluate);
         this.setNote(note);
         this.setIs_del(is_del);
+        this.setRecommend_id(recommend_id);
 
     }
 
@@ -368,6 +380,7 @@ public class Goods_order implements Cloneable , Serializable{
         int is_evaluate = goods_order.getIs_evaluate();
         String note = goods_order.getNote();
         int is_del = goods_order.getIs_del();
+        long recommend_id = goods_order.getRecommend_id();
     }
 
     public Map<String,Object> toMap(){
@@ -399,6 +412,7 @@ public class Goods_order implements Cloneable , Serializable{
         int is_evaluate = goods_order.getIs_evaluate();
         String note = goods_order.getNote();
         int is_del = goods_order.getIs_del();
+        long recommend_id = goods_order.getRecommend_id();
     
         Map<String,Object>  _ret = new HashMap<String,Object>();
         _ret.put("go_id",go_id);
@@ -425,6 +439,7 @@ public class Goods_order implements Cloneable , Serializable{
         _ret.put("is_evaluate",is_evaluate);
         _ret.put("note",note);
         _ret.put("is_del",is_del);
+        _ret.put("recommend_id",recommend_id);
         return _ret;
     }
 

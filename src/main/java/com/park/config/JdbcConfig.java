@@ -36,12 +36,12 @@ public class JdbcConfig {
     }
 
 
-    @Resource(name="dataSource_slave")
+    /*@Resource(name="dataSource_slave")
     DataSource dataSource_slave;
 
     @Bean(name = "dataSource_slave")
     @ConfigurationProperties(prefix = "custom.datasource.ds2")
-    public DataSource dataSource_slave(){ return new DruidDataSource(); }
+    public DataSource dataSource_slave(){ return new DruidDataSource(); }*/
 
     @Bean(name="dynamicDataSource")
     public DynamicDataSource makeDynamicDataSource(){
@@ -49,7 +49,7 @@ public class JdbcConfig {
         dds.setDefaultTargetDataSource(dataSource_master);
         Map<Object,Object> map = new HashMap<Object,Object>();
         map.put("master",dataSource_master);
-        map.put("slave",dataSource_slave);
+//        map.put("slave",dataSource_slave);
         dds.setTargetDataSources(map);
         return  dds;
     }
