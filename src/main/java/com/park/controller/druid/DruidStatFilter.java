@@ -1,4 +1,4 @@
-package com.park.controller;
+package com.park.controller.druid;
 
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;

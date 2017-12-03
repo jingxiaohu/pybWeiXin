@@ -1,4 +1,4 @@
-package com.park.bean;
+package com.park.controller.param;
 
 
 /**

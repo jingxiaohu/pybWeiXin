@@ -1,4 +1,4 @@
-package com.park.bean;
+package com.park.controller.param;
 
 
 public class ReturnData implements ReturnDataBase{

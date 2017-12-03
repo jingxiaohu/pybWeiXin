@@ -1,6 +1,6 @@
 package com.park.util;
 
-import com.park.bean.ReturnData;
+import com.park.controller.param.ReturnData;
 import com.park.constants.AppProperties;
 import java.io.BufferedReader;
 import java.io.File;
