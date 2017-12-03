@@ -15,9 +15,10 @@ public class JxhCoderAuto {
 		boolean is_maven = true;
 		String moduleName="";
 		String pkg = "com.park.";
-		String[] tablenames = {"user_info","after_sale","evaluate","goods","goods_details","goods_order"
-				,"goods_type","user_address","request_params_log","china_area","apply_cash"
-		,"recommend_user","recommend_earnings"};
+		String[] tablenames = {"wx_user_info","wx_after_sale","wx_evaluate","wx_goods","wx_goods_details"
+				,"wx_goods_order"
+				,"wx_goods_type","wx_user_address","request_params_log","china_area","wx_apply_cash"
+		,"wx_recommend_user","wx_recommend_earnings"};
 		String ip = "127.0.0.1";
 		int port = 3306;
 		String user = "root";
